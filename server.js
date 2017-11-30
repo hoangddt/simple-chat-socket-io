@@ -29,6 +29,12 @@ io.on('connection', function(socket) {
 
       users.push(userObj);
       io.emit('all-users', users);
+  });
+
+  // Broad cast the messafe to all
+  socket.on('send-message', function (data) {
+      socket.broadcast.emit('message-received', data);
+      // io.emit('message-received', data);
   })
 });
 
