@@ -13,7 +13,7 @@
 
     $scope.join = function () {
         nickname = $scope.name;
-        $localStorage.nickname = $scope.name;
+        $localStorage.nickName = $scope.name;
 
         $location.path('/main');
     }
