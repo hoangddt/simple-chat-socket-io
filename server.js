@@ -12,6 +12,9 @@ app.use(express.static(path.join(__dirname, "public")));
 io.on('connection', function(socket) {
   console.log('new connection made');
 
+  socket.on('get-users', function () {
+      socket.emit('all-users', users);
+  })
   socket.on('join', function (data) {
       console.log(data);
       console.log(users);
@@ -25,7 +28,7 @@ io.on('connection', function(socket) {
 
 
       users.push(userObj);
-      io.emit('all-user', users);
+      io.emit('all-users', users);
   })
 });
 
