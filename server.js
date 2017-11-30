@@ -31,10 +31,10 @@ io.on('connection', function(socket) {
       io.emit('all-users', users);
   });
 
-  // Broad cast the messafe to all
+  // Broad cast the message to all
   socket.on('send-message', function (data) {
-      socket.broadcast.emit('message-received', data);
-      // io.emit('message-received', data);
+      // socket.broadcast.emit('message-received', data);
+      io.emit('message-received', data);
   })
 });
 

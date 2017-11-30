@@ -31,7 +31,7 @@
         };
         socket.emit('send-message', newMesssage);
         $scope.message = '';
-        $scope.messages.push(newMesssage);
+        // $scope.messages.push(newMesssage);
     }
   };
 })();
