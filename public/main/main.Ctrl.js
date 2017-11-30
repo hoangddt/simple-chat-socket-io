@@ -10,6 +10,7 @@
   function MainCtrl($scope, $localStorage, socket, lodash) {
     $scope.users = [];
     $scope.message = '';
+    $scope.likes = [];
     $scope.messages = [];
     $scope.mynickname = $localStorage.nickName;
     var nickname = $scope.mynickname;
@@ -33,5 +34,21 @@
         $scope.message = '';
         // $scope.messages.push(newMesssage);
     }
+
+    $scope.sendLike = function (user) {
+        console.log("User in send like: ", user);
+        var id = lodash.get(user, 'socketid');
+        var likeObj = {
+            from: nickname,
+            like: id
+        }
+        console.log("Send like to: ", id);
+        socket.emit('send-like', likeObj);
+    }
+
+    socket.on('user-liked', function (data) {
+        console.log("Receieve user like: ", data);
+        $scope.likes.push(data.from);
+    });
   };
 })();

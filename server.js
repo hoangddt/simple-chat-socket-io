@@ -23,7 +23,7 @@ io.on('connection', function(socket) {
 
       var userObj = {
         nickname: data.nickname,
-        socket: socket.id
+        socketid: socket.id
       };
 
 
@@ -35,6 +35,11 @@ io.on('connection', function(socket) {
   socket.on('send-message', function (data) {
       // socket.broadcast.emit('message-received', data);
       io.emit('message-received', data);
+  })
+
+  socket.on('send-like', function (data) {
+      console.log(data);
+      socket.broadcast.to(data.like).emit('user-liked', data);
   })
 });
 
