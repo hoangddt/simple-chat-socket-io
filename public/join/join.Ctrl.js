@@ -15,6 +15,9 @@
         nickname = $scope.name;
         $localStorage.nickName = $scope.name;
 
+        socket.emit('join', {
+            nickname: nickname
+        })
         $location.path('/main');
     }
   }
