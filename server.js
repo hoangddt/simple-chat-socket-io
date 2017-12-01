@@ -41,6 +41,13 @@ io.on('connection', function(socket) {
       console.log(data);
       socket.broadcast.to(data.like).emit('user-liked', data);
   })
+
+  socket.on('disconnect', function () {
+      users.filter(function (ite) {
+          return ite.nickname !== socket.nickname;
+      });
+      io.emit('all-users', users);
+  })
 });
 
 server.listen(port, function() {
